@@ -1,0 +1,13 @@
+---
+
+- name: Ping Servers
+  hosts: all
+  become: true
+  
+  tasks:
+             - name: Ping the server
+               ansible.builtin.ping:
+
+             - name: Print message
+               ansible.builtin.debug:
+                       msg: Salam Qizlar

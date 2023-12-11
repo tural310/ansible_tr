@@ -10,20 +10,24 @@
             dnf:
                     name: httpd
                     state: present
+            when: ansible_distribution == "Almalinux"
 
           - name: Start Apache service
             systemd:
                     name: httpd
                     state: started
                     enabled: true
+            when: ansible_distribution == "Almalinux"
 
           - name: Allow Http traffic in the firewall
             firewalld:
                     service: http
                     permanent: true
                     state: enabled
+            when: ansible_distribution == "Almalinux"
 
           - name: Reload firewall
             systemd:
                     name: firewalld
                     state: reloaded
+            when: ansible_distribution == "Almalinux"
