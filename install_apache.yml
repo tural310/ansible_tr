@@ -1,0 +1,29 @@
+---
+
+- name: Install Apache HTTP Server
+  hosts: all
+  become: true
+  
+  tasks:
+
+          - name: install http package
+            dnf:
+                    name: httpd
+                    state: present
+
+          - name: Start Apache service
+            systemd:
+                    name: httpd
+                    state: started
+                    enabled: true
+
+          - name: Allow Http traffic in the firewall
+            firewalld:
+                    service: http
+                    permanent: true
+                    state: enabled
+
+          - name: Reload firewall
+            systemd:
+                    name: firewalld
+                    state: reloaded
